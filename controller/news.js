@@ -1,5 +1,5 @@
-import axios from "axios";
-import cheerio from "cheerio";
+const axios = require("axios");
+const cheerio = require("cheerio");
 
 const News = {
   getAllNews: async (req, res) => {
@@ -16,31 +16,41 @@ const News = {
         id: id,
         title: news.find("h3 a").text(),
         time: news.find("time").text(),
+        img: news.find("img").attr("src"),
       });
     });
 
-    return res.status(200).json({ code: 200, result: newsDataList });
+    return res.status(200).json({ newsDataList });
   },
   getDetailNews: async (req, res) => {
     const { idnews } = req.params;
-
+  
+    // Mengambil data detail berita
     const response = await axios.get(`https://jkt48.com/news/detail/id/${idnews}?lang=id`);
-
+  
     const $ = cheerio.load(response.data);
-
+  
     const newsDetail = [];
-    $(".row .col-lg-9 .entry-news .entry-news__detail").each((i, element) => {
+    $(".entry-news .entry-news__detail").each((i, element) => {
       const news = $(element);
-
+  
+      // Mengambil semua elemen img di dalam elemen news
+      const imageUrls = [];
+      news.find("img").each((i, img) => {
+        imageUrls.push($(img).attr("src"));
+      });
+  
       newsDetail.push({
         title: news.find("h3").text(),
         time: news.find("div.metadata2.mb-2").text(),
         news: news.find("div.entry-news__detail > div").text(),
+        imageUrls: imageUrls,
       });
     });
-
-    return res.status(200).json({ code: 200, result: newsDetail });
-  },
+  
+    return res.status(200).json( newsDetail );
+  }
+  
 };
 
 module.exports = News;
