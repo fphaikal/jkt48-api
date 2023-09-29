@@ -43,7 +43,7 @@ const News = {
       newsDetail.push({
         title: news.find("h3").text(),
         time: news.find("div.metadata2.mb-2").text(),
-        news: news.find("div.entry-news__detail > div").text(),
+        news: news.find("div.entry-news__detail > div > p").text(),
         imageUrls: imageUrls,
       });
     });
