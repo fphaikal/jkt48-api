@@ -34,6 +34,8 @@ const News = {
     $(".entry-news .entry-news__detail").each((i, element) => {
       const news = $(element);
   
+      const paragraphs = news.find("div.entry-news__detail > div > p");
+      const newsText = paragraphs.map((i, p) => $(p).text()).get().join('\n\n');
       // Mengambil semua elemen img di dalam elemen news
       const imageUrls = [];
       news.find("img").each((i, img) => {
@@ -43,7 +45,7 @@ const News = {
       newsDetail.push({
         title: news.find("h3").text(),
         time: news.find("div.metadata2.mb-2").text(),
-        news: news.find("div.entry-news__detail > div > p").text(),
+        news: newsText,
         imageUrls: imageUrls,
       });
     });
