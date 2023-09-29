@@ -6,7 +6,7 @@ const liveRouter = require('./routes/liveRoute');
 const missionRouter = require('./routes/missionRoute');
 const newsRouter = require('./routes/newsRoute')
 const app = express();
-const PORT = 8001;
+const PORT = 8000;
 
 app.use(cors())
 app.use(bodyParser.json());
