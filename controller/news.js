@@ -35,7 +35,7 @@ const News = {
       const news = $(element);
   
       const paragraphs = news.find("div.entry-news__detail > div > p");
-      const newsText = paragraphs.map((i, p) => $(p).text()).get().join('\n\n');
+      const newsText = paragraphs.map((i, p) => $(p).text()).get().join('\n');
       // Mengambil semua elemen img di dalam elemen news
       const imageUrls = [];
       news.find("img").each((i, img) => {
