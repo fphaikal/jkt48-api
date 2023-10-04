@@ -6,6 +6,7 @@ const liveRouter = require('./routes/liveRoute');
 const missionRouter = require('./routes/missionRoute');
 const newsRouter = require('./routes/newsRoute')
 const scheduleRouter  = require('./routes/schedulesRoute')
+const tiktokRouter =require('./routes/tiktokRoute')
 
 const app = express();
 const PORT = 8000;
@@ -29,3 +30,4 @@ app.use('/api/lives', liveRouter);
 app.use('/api/missions', missionRouter);
 app.use('/api/news', newsRouter);
 app.use('/api/schedule', scheduleRouter);
+app.use('/api/tiktok', tiktokRouter);
