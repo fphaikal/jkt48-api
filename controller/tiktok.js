@@ -227,7 +227,7 @@ const Tiktok = {
         return res.status(200).json({ data });
     },
     getChelseaData: async (req, res) => {
-        const response = await axios.get("https://www.tiktok.com/@chelseajkt48");
+        const response = await axios.get("https://www.tiktok.com/@_chelseajkt48");
     
         const $ = cheerio.load(response.data);
     
@@ -963,7 +963,7 @@ const Tiktok = {
         return res.status(200).json({ data });
     },
     getLiaData: async (req, res) => {
-        const response = await axios.get("https://www.tiktok.com/@liajkt48");
+        const response = await axios.get("https://www.tiktok.com/@jkt48.aurellia_");
     
         const $ = cheerio.load(response.data);
     
@@ -995,7 +995,7 @@ const Tiktok = {
         return res.status(200).json({ data });
     },
     getLuluData: async (req, res) => {
-        const response = await axios.get("https://www.tiktok.com/@lulujkt48");
+        const response = await axios.get("https://www.tiktok.com/@lulu_jkt48");
     
         const $ = cheerio.load(response.data);
     
@@ -1091,7 +1091,7 @@ const Tiktok = {
         return res.status(200).json({ data });
     },
     getMarshaData: async (req, res) => {
-        const response = await axios.get("https://www.tiktok.com/@marshajkt48");
+        const response = await axios.get("https://www.tiktok.com/@marsha.jkt48");
     
         const $ = cheerio.load(response.data);
     
@@ -1219,7 +1219,7 @@ const Tiktok = {
         return res.status(200).json({ data });
     },
     getRaishaData: async (req, res) => {
-        const response = await axios.get("https://www.tiktok.com/@raishajkt48");
+        const response = await axios.get("https://www.tiktok.com/@jkt48.raisha.s");
     
         const $ = cheerio.load(response.data);
     
