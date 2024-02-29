@@ -1,10 +1,26 @@
 {
-    "version": 2,
-    "builds": [{ "src": "index.js", "use": "@now/node" }],
     "routes": [
-        {
-        "src": "/(.*)",
-        "dest": "index.js"
-        }
-    ]
-} 
+      {
+        "src": "/api/.*",
+        "dest": "/api/index.js"
+      },
+      {
+        "src": "/api/(.*)",
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "methods": ["GET", "POST", "PUT", "DELETE"],
+        "dest": "/api/index.js"
+      },
+      {
+        "src": "/api/(.*)",
+        "dest": "/api/index.js"
+      }
+    ],
+    "error": {
+      "status": 500,
+      "message": "Internal server error. Please try again later."
+    }
+  }
+  
