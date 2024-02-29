@@ -1,5 +1,6 @@
 const axios = require("axios")
 const cheerio = require("cheerio")
+const fetchService = require("../utils/fetchService");
 
 const schedule = {
   getSchedule: async (req, res) => {
@@ -110,6 +111,21 @@ const schedule = {
 
     return res.status(200).json({ code: 200, result: scheduleDetailData });
   },
+
+  getSchedule2: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const response = await fetchService(`https://showroom-admin.vercel.app/schedules?`, res);
+      const data = response.data;
+
+      res.send(data);
+      console.log(data)
+    } catch (error) {
+      console.error("Error fetching LogLive detail:", error);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  
+  }
 };
 
 module.exports = schedule
