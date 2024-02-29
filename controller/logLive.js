@@ -6,7 +6,7 @@ const LogLives = {
     try {
       const { page, perpage, roomId } = req.query;
       const response = await fetchService(
-        `${LOGLIVE}/api/recent?sort=date&page=${page}&filter=all&order=-1&group=jkt48&type=all&perpage=${perpage}&room_id=${roomId}`,
+        `https://api.crstlnz.my.id/api/recent?sort=date&page=${page}&filter=all&order=-1&group=jkt48&type=all&perpage=${perpage}&room_id=${roomId}`,
         res
       );
       const data = response.data;
@@ -20,7 +20,7 @@ const LogLives = {
   getLogLiveDetail: async (req, res) => {
     try {
       const { id } = req.params;
-      const response = await fetchService(`${LOGLIVE}/api/recent/${id}`, res);
+      const response = await fetchService(`https://api.crstlnz.my.id/api/recent/${id}`, res);
       const data = response.data;
 
       res.send(data);
