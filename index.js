@@ -7,6 +7,8 @@ const missionRouter = require('./routes/missionRoute');
 const newsRouter = require('./routes/newsRoute')
 const scheduleRouter  = require('./routes/schedulesRoute')
 const tiktokRouter =require('./routes/tiktokRoute')
+const logLiveRouter = require('./routes/logLiveRoute');
+const MemberRouter = require('./routes/MemberRoute');
 
 const app = express();
 const PORT = 8000;
@@ -20,7 +22,7 @@ app.listen(PORT, () => {
 
 app.get('/', (req, res) => {
     res.send({
-        message: 'API for VuePH',
+        message: 'API JKT48',
         author: 'https://github.com/fphaikal',
     })
 });
@@ -31,3 +33,5 @@ app.use('/api/missions', missionRouter);
 app.use('/api/news', newsRouter);
 app.use('/api/schedule', scheduleRouter);
 app.use('/api/tiktok', tiktokRouter);
+app.use('/api/recent', logLiveRouter);
+app.use('/api/member', MemberRouter);

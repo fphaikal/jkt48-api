@@ -1,5 +1,5 @@
 {
-  "name": "jkt48-showroom-api",
+  "name": "jkt48-api",
   "version": "1.0.0",
   "description": "API for jkt48 showroom",
   "main": "index.js",
