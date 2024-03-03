@@ -1,14 +1,12 @@
 const { LOGLIVE } = require("../utils/api");
 const fetchService = require("../utils/fetchService");
+const axios = require('axios')
 
 const LogLives = {
   getLogLive: async (req, res) => {
     try {
       const { page, perpage, roomId } = req.query;
-      const response = await fetchService(
-        `https://api.crstlnz.my.id/api/recent?sort=date&page=${page}&filter=all&order=-1&group=jkt48&type=all&perpage=${perpage}&room_id=${roomId}`,
-        res
-      );
+      const response = await axios.get(`https://api.crstlnz.my.id/api/recent?sort=date&page=${page}&filter=all&order=-1&group=jkt48&type=all&perpage=${perpage}`, res);
       const data = response.data;
 
       res.send(data);

@@ -14,6 +14,7 @@
     "cheerio": "^1.0.0-rc.12",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "node-fetch": "^3.3.2",
     "nodemon": "^2.0.19",
     "puppeteer": "^21.3.6"
   }
