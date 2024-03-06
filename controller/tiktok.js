@@ -4,9 +4,62 @@ const puppeteer = require("puppeteer");
 const fs = require('fs');
 
 const tiktokAccounts = [
+  "jkt48.aralie",
+  "jkt48.delynn",
+  "jkt48.shasa",
+  "alyajkt48",
+  "jkt48.amanda.s",
+  "christyjkt48",
+  "anindyajkt48",
+  "jkt48.aurellia_",
+  "jkt48.lana",
+  "zeejkt48",
+  "jkt48.callie.a",
   "jkt48.erine_",
+  "cathyjkt48",
+  "elinjkt48",
+  "_chelseajkt48",
+  "onieljkt48",
+  "cynthiajkt48",
+  "danellajkt48",
+  "daisyjkt48",
+  "ollajkt48",
+  "fenijkt48",
+  "fionyjkt48",
+  "florajkt48",
+  "freyajkt48",
+  "gendisjkt48",
+  "jkt48.fritzy",
+  "jkt48.ella.a",
+  "gitajkt48",
+  "graciejkt48",
+  "greeseljkt48",
+  "elijkt48",
+  "jkt48.lily",
+  "indahjkt48",
   "jkt48.indira.s",
+  "jkt48.trisha",
+  "jeanejkt48",
+  "jessijkt48",
+  "jkt48.lyn.s",
+  "kathrinjkt48",
+  "jkt48.moreen",
+  "lulu_jkt48",
   "marsha.jkt48",
+  "michiejkt48",
+  "jkt48.levi",
+  "muthejkt48",
+  "jkt48.nayla",
+  "jkt48.nachia",
+  "jkt48.oline",
+  "jkt48.raisha.s",
+  "jkt48.regie",
+  "adeljkt48",
+  "jkt48.ribka",
+  "jkt48.nala",
+  "jkt48.kimmy",
+  "shanijkt48",
+  "graciajkt48",
 ];
 const Tiktok = {
   getData: async (username) => {
@@ -40,7 +93,7 @@ const Tiktok = {
     await browser.close();
 
     // Simpan data ke file JSON
-    fs.writeFile(`../db/tiktok/${username}_data.json`, JSON.stringify(data), (err) => {
+    fs.writeFile(`./db/tiktok/${username}_data.json`, JSON.stringify(data), (err) => {
       if (err) {
         console.error(`Error writing to JSON file for ${username}:`, err);
         return;
@@ -56,7 +109,8 @@ tiktokAccounts.forEach(username => {
   // Setiap 5 jam, data akan diperbarui
   setInterval(() => {
     Tiktok.getData(username);
-  }, 5 * 60 * 60 * 1000);
+    console.log(`Updating data for ${username}...`);  
+  }, 1 * 60 * 60 * 1000);
 });
 
 module.exports = Tiktok;
