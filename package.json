@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon index.js"
   },
-  "author": "Ikhbal Dwiyantoro",
+  "author": "FPHaikal",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.24.0",
