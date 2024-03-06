@@ -1,7 +1,6 @@
-const axios = require("axios");
-const cheerio = require("cheerio");
 const puppeteer = require("puppeteer");
 const fs = require('fs');
+const cron = require('node-cron');
 
 const tiktokAccounts = [
   "jkt48.aralie",
@@ -79,7 +78,7 @@ const Tiktok = {
     } catch (error) {
       console.error(`Timeout while waiting for ${username}'s data:`, error);
       await browser.close();
-      return;
+      return null;
     }
 
     // Ekstraksi data
@@ -99,37 +98,32 @@ const Tiktok = {
     // Tutup browser setelah selesai
     await browser.close();
 
-    // Simpan data ke file JSON
-    fs.writeFile(`./db/tiktok/${username}_data.json`, JSON.stringify(data), (err) => {
-      if (err) {
-        console.error(`Error writing to JSON file for ${username}:`, err);
-        return;
-      }
-      console.log(`Data saved to ${username}_data.json`);
-    });
+    return data;
   },
 };
 
-// Panggil fungsi getData untuk setiap akun TikTok dengan batasan jumlah akun yang diproses bersamaan
-const MAX_CONCURRENT_REQUESTS = 5;
-let currentIndex = 0;
-
-const processAccounts = async () => {
-  const currentBatch = tiktokAccounts.slice(currentIndex, currentIndex + MAX_CONCURRENT_REQUESTS);
-  currentIndex += MAX_CONCURRENT_REQUESTS;
-  await Promise.all(currentBatch.map(username => Tiktok.getData(username)));
-  if (currentIndex < tiktokAccounts.length) {
-    setTimeout(processAccounts, 10000); // tunggu 10 detik sebelum memproses batch berikutnya
+// Fungsi untuk memperbarui data untuk semua akun
+const updateAllData = async () => {
+  const allData = {};
+  for (const username of tiktokAccounts) {
+    const data = await Tiktok.getData(username);
+    if (data) {
+      allData[username] = data;
+      console.log(`Data for ${username} collected.`);
+    }
   }
+
+  // Simpan semua data ke dalam satu file JSON
+  fs.writeFile(`./db/tiktok/all_data.json`, JSON.stringify(allData, null, 2), (err) => {
+    if (err) {
+      console.error(`Error writing to JSON file:`, err);
+      return;
+    }
+    console.log(`All data saved to all_data.json`);
+  });
 };
 
-processAccounts();
+updateAllData();
 
-// Setiap 1 jam, data akan diperbarui
-setInterval(() => {
-  currentIndex = 0; // Mulai ulang pengolahan akun
-  processAccounts();
-  console.log(`Updating data for all accounts...`);
-}, 1 * 60 * 60 * 1000);
 
 module.exports = Tiktok;
