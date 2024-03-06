@@ -6,5 +6,11 @@
         "src": "/(.*)",
         "dest": "index.js"
         }
-    ]
+    ],
+    "functions": {
+        "api/scrape.js": {
+          "runtime": "nodejs14.x",
+          "memory": 1024
+        }
+      }
 } 
