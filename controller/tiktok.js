@@ -124,6 +124,11 @@ const updateAllData = async () => {
 };
 
 updateAllData();
-
+// Jadwalkan pembaruan data setiap hari pukul 03:00 WIB
+cron.schedule('0 3 * * *', () => {
+  console.log('Starting data update at 03:00 AM WIB...');
+}, {
+  timezone: "Asia/Jakarta"
+});
 
 module.exports = Tiktok;
