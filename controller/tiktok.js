@@ -69,7 +69,7 @@ const Tiktok = {
   getData: async (username) => {
     // Mulai browser Chromium
     const browser = await puppeteerExtra.launch({
-      headless: false
+      headless: "new", // Ubah menjadi true untuk menjalankan headless
     });
 
     
