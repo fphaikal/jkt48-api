@@ -11,6 +11,7 @@ const tiktokRouter =require('./routes/tiktokRoute')
 const logLiveRouter = require('./routes/logLiveRoute');
 const MemberRouter = require('./routes/MemberRoute');
 const twitterRouter = require('./routes/twitterRoute');
+const igRouter = require('./routes/igRoute');
 
 const app = express();
 const PORT = 8000;
@@ -38,4 +39,5 @@ app.use('/api/tiktok', tiktokRouter);
 app.use('/api/recent', logLiveRouter);
 app.use('/api/member', MemberRouter);
 app.use('/api/twitter', twitterRouter);
+app.use('/api/ig', igRouter);
 

@@ -1,6 +1,10 @@
-const puppeteer = require("puppeteer");
+const puppeteerExtra = require('puppeteer-extra');
+const Stealth = require('puppeteer-extra-plugin-stealth');
+
 const fs = require('fs');
 const cron = require('node-cron');
+
+puppeteerExtra.use(Stealth());
 
 const tiktokAccounts = [
   "jkt48.aralie",
@@ -64,17 +68,18 @@ const tiktokAccounts = [
 const Tiktok = {
   getData: async (username) => {
     // Mulai browser Chromium
-    const browser = await puppeteer.launch({
-      headless: "new"
+    const browser = await puppeteerExtra.launch({
+      headless: false
     });
 
+    
     // Buka halaman TikTok yang ingin di-scrap
     const page = await browser.newPage();
     await page.goto(`https://www.tiktok.com/@${username}`);
 
     // Tunggu hingga data dimuat
     try {
-      await page.waitForSelector('.css-1g04lal-DivShareLayoutHeader-StyledDivShareLayoutHeaderV2', { timeout: 60000 });
+      await page.waitForSelector('[data-e2e="user-post-item-list"]', { timeout: 120000 });
     } catch (error) {
       console.error(`Timeout while waiting for ${username}'s data:`, error);
       await browser.close();
@@ -83,17 +88,24 @@ const Tiktok = {
 
     // Ekstraksi data
     const data = await page.evaluate(() => {
-      const scrapedData = {};
+      const scrapedData = {}; 
       const userInfo = document.querySelector('.css-1g04lal-DivShareLayoutHeader-StyledDivShareLayoutHeaderV2');
-      scrapedData.photo = userInfo.querySelector('.e1vl87hj2').querySelector('img').src;
+      scrapedData.photo = userInfo.querySelector('.e1vl87hj2 img').src;
       scrapedData.username = userInfo.querySelector('.css-1xo9k5n-H1ShareTitle').textContent.trim();
       scrapedData.name = userInfo.querySelector('.css-10pb43i-H2ShareSubTitle').textContent.trim();
       scrapedData.description = userInfo.querySelector('.css-4ac4gk-H2ShareDesc').textContent.trim();
       scrapedData.following = userInfo.querySelector('[data-e2e="following-count"]').textContent.trim();
       scrapedData.followers = userInfo.querySelector('[data-e2e="followers-count"]').textContent.trim();
       scrapedData.likes = userInfo.querySelector('[data-e2e="likes-count"]').textContent.trim();
+      
+      
+      const userVideos = document.querySelectorAll('[data-e2e="user-post-item-list"] .css-vi46v1-DivDesContainer [data-e2e="user-post-item-desc"] a.css-1wrhn5c-AMetaCaptionLine.eih2qak0');
+      // Ambil link dari semua video
+      scrapedData.links = Array.from(userVideos).map(video => video.getAttribute('href'));
+    
       return scrapedData;
     });
+    
 
     // Tutup browser setelah selesai
     await browser.close();
@@ -123,12 +135,13 @@ const updateAllData = async () => {
   });
 };
 
-updateAllData();
 // Jadwalkan pembaruan data setiap hari pukul 03:00 WIB
-cron.schedule('0 3 * * *', () => {
-  console.log('Starting data update at 03:00 AM WIB...');
+cron.schedule('15 13 * * *', () => {
+  console.log('Starting data update at 13:15...');
+  updateAllData();
 }, {
   timezone: "Asia/Jakarta"
 });
+
 
 module.exports = Tiktok;

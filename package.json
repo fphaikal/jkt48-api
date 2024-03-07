@@ -16,11 +16,14 @@
     "easytwitterscraper": "^1.0.1",
     "express": "^4.17.1",
     "fs": "^0.0.1-security",
+    "nayan-media-downloader": "^2.0.7",
     "node-cron": "^3.0.3",
     "node-fetch": "^3.3.2",
     "nodemon": "^2.0.19",
     "puppeteer": "^21.11.0",
     "puppeteer-core": "^22.4.0",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
     "x-scrapper": "^1.0.1"
   }
 }

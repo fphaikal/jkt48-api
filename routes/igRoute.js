@@ -1,10 +1,10 @@
 const express = require("express");
-//const tiktok = require("../controller/tiktok");
 const router = express.Router();
 const fs = require("fs");
+//const ig = require("../controller/ig");
 
 router.get("/", (req, res) => {
-  const filePath = `./db/tiktok/all_data.json`;
+  const filePath = `./db/ig/all_data.json`;
   // Membaca data dari file JSON
   fs.readFile(filePath, 'utf8', (err, data) => {
     if (err) {
@@ -17,7 +17,7 @@ router.get("/", (req, res) => {
 });
 router.get("/:member", (req, res) => {
   const { member } = req.params;
-  const filePath = `./db/tiktok/all_data.json`;
+  const filePath = `./db/ig/all_data.json`;
 
   // Membaca data dari file JSON
   fs.readFile(filePath, "utf8", (err, data) => {
