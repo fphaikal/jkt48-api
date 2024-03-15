@@ -6,67 +6,69 @@ const cron = require('node-cron');
 
 puppeteerExtra.use(Stealth());
 
-const tiktokAccounts = [
-  "jkt48.aralie",
-  "jkt48.delynn",
-  "jkt48.shasa",
-  "alyajkt48",
-  "jkt48.amanda.s",
-  "christyjkt48",
-  "anindyajkt48",
-  "jkt48.aurellia_",
-  "jkt48.lana",
-  "zeejkt48",
-  "jkt48.callie.a",
-  "jkt48.erine_",
-  "cathyjkt48",
-  "elinjkt48",
-  "_chelseajkt48",
-  "onieljkt48",
-  "cynthiajkt48",
-  "danellajkt48",
-  "daisyjkt48",
-  "ollajkt48",
-  "fenijkt48",
-  "fionyjkt48",
-  "florajkt48",
-  "freyajkt48",
-  "gendisjkt48",
-  "jkt48.fritzy",
-  "jkt48.ella.a",
-  "gitajkt48",
-  "graciejkt48",
-  "greeseljkt48",
-  "elijkt48",
-  "jkt48.lily",
-  "indahjkt48",
-  "jkt48.indira.s",
-  "jkt48.trisha",
-  "jeanejkt48",
-  "jessijkt48",
-  "jkt48.lyn.s",
-  "kathrinjkt48",
-  "jkt48.moreen",
-  "lulu_jkt48",
-  "marsha.jkt48",
-  "michiejkt48",
-  "jkt48.levi",
-  "muthejkt48",
-  "jkt48.nayla",
-  "jkt48.nachia",
-  "jkt48.oline",
-  "jkt48.raisha.s",
-  "jkt48.regie",
-  "adeljkt48",
-  "jkt48.ribka",
-  "jkt48.nala",
-  "jkt48.kimmy",
-  "shanijkt48",
-  "graciajkt48",
-];
+// const tiktokAccounts = [
+//   "jkt48.aralie",
+//   "jkt48.delynn",
+//   "jkt48.shasa",
+//   "alyajkt48",
+//   "jkt48.amanda.s",
+//   "christyjkt48",
+//   "anindyajkt48",
+//   "jkt48.aurellia_",
+//   "jkt48.lana",
+//   "zeejkt48",
+//   "jkt48.callie.a",
+//   "jkt48.erine_",
+//   "cathyjkt48",
+//   "elinjkt48",
+//   "_chelseajkt48",
+//   "onieljkt48",
+//   "cynthiajkt48",
+//   "danellajkt48",
+//   "daisyjkt48",
+//   "ollajkt48",
+//   "fenijkt48",
+//   "fionyjkt48",
+//   "florajkt48",
+//   "freyajkt48",
+//   "gendisjkt48",
+//   "jkt48.fritzy",
+//   "jkt48.ella.a",
+//   "gitajkt48",
+//   "graciejkt48",
+//   "greeseljkt48",
+//   "elijkt48",
+//   "jkt48.lily",
+//   "indahjkt48",
+//   "jkt48.indira.s",
+//   "jkt48.trisha",
+//   "jeanejkt48",
+//   "jessijkt48",
+//   "jkt48.lyn.s",
+//   "kathrinjkt48",
+//   "jkt48.moreen",
+//   "lulu_jkt48",
+//   "marsha.jkt48",
+//   "michiejkt48",
+//   "jkt48.levi",
+//   "muthejkt48",
+//   "jkt48.nayla",
+//   "jkt48.nachia",
+//   "jkt48.oline",
+//   "jkt48.raisha.s",
+//   "jkt48.regie",
+//   "adeljkt48",
+//   "jkt48.ribka",
+//   "jkt48.nala",
+//   "jkt48.kimmy",
+//   "shanijkt48",
+//   "graciajkt48",
+// ];
 
 const Tiktok = {
-  getData: async (username) => {
+  getData: async (req,res) => {
+    const { username } = req.params;
+
     // Mulai browser Chromium
     const browser = await puppeteerExtra.launch({
       headless: "new", // Ubah menjadi true untuk menjalankan headless
@@ -110,38 +112,9 @@ const Tiktok = {
     // Tutup browser setelah selesai
     await browser.close();
 
-    return data;
+    res.send(data);
   },
 };
-
-// Fungsi untuk memperbarui data untuk semua akun
-const updateAllData = async () => {
-  const allData = {};
-  for (const username of tiktokAccounts) {
-    const data = await Tiktok.getData(username);
-    if (data) {
-      allData[username] = data;
-      console.log(`Data for ${username} collected.`);
-    }
-  }
-
-  // Simpan semua data ke dalam satu file JSON
-  fs.writeFile(`./db/tiktok/all_data.json`, JSON.stringify(allData, null, 2), (err) => {
-    if (err) {
-      console.error(`Error writing to JSON file:`, err);
-      return;
-    }
-    console.log(`All data saved to all_data.json`);
-  });
-};
-
-// Jadwalkan pembaruan data setiap hari pukul 03:00 WIB
-cron.schedule('15 13 * * *', () => {
-  console.log('Starting data update at 13:15...');
-  updateAllData();
-}, {
-  timezone: "Asia/Jakarta"
-});
 
 
 module.exports = Tiktok;

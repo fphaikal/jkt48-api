@@ -8,68 +8,69 @@ const axios = require('axios');
 
 puppeteerExtra.use(Stealth());
 
-const twitterAccounts = [
-    "SP_IndiraJKT48",
-    "Y_CynthiaJKT48",
-    "Aralie_JKT48",
-    "Delynn_JKT48",
-    "Shasa_JKT48",
-    "AA_AlyaJKT48",
-    "PS_AmandaJKT48",
-    "A_ChristyJKT48",
-    "AR_AnindyaJKT48",
-    "AU_LiaJKT48",
-    "AR_LanaJKT48",
-    "A_ZeeJKT48",
-    "AW_CallieJKT48",
-    "CErine_JKT48",
-    "N_CathyJKT48",
-    "Elin_JKT48",
-    "DC_ChelseaJKT48",
-    "C_OnielJKT48",
-    "Danella_JKT48",
-    "Daisy_JKT48",
-    "f_ollajt48",
-    "jkt48feni",
-    "A_FionyJKT48",
-    "S_FloraJKT48",
-    "RFritzy_JKT48",
-    "AM_EllaJKT48",
-    "Gendis_JKT48",
-    "A_GitaJKT48",
-    "Gracie_JKT48",
-    "Greesel_JKT48",
-    "H_EliJKT48",
-    "Lily_JKT48",
-    "C_IndahJKT48",
-    "JTrisha_JKT48",
-    "Jeane_JKT48",
-    "C_JessiJKT48",
-    "SE_LynJKT48",
-    "I_KathrinaJKT48",
-    "Moreen_JKT48",
-    "A_LuluJKT48",
-    "L_MarshaJKT48",
-    "Michie_JKT48",
-    "Levi_JKT48",
-    "A_MutheJKT48",
-    "SNayla_JKT48",
-    "Nachia_JKT48",
-    "M_OlineJKT48",
-    "SW_RaishaJKT48",
-    "Regie_JKT48",
-    "R_AdelJKT48",
-    "Ribka_JKT48",
-    "Nala_JKT48",
-    "N_ShaniJKT48", 
-    "S_GraciaJKT48",
-    "Kimmy_JKT48",
-];
+// const twitterAccounts = [
+//     "SP_IndiraJKT48",
+//     "Y_CynthiaJKT48",
+//     "Aralie_JKT48",
+//     "Delynn_JKT48",
+//     "Shasa_JKT48",
+//     "AA_AlyaJKT48",
+//     "PS_AmandaJKT48",
+//     "A_ChristyJKT48",
+//     "AR_AnindyaJKT48",
+//     "AU_LiaJKT48",
+//     "AR_LanaJKT48",
+//     "A_ZeeJKT48",
+//     "AW_CallieJKT48",
+//     "CErine_JKT48",
+//     "N_CathyJKT48",
+//     "Elin_JKT48",
+//     "DC_ChelseaJKT48",
+//     "C_OnielJKT48",
+//     "Danella_JKT48",
+//     "Daisy_JKT48",
+//     "f_ollajt48",
+//     "jkt48feni",
+//     "A_FionyJKT48",
+//     "S_FloraJKT48",
+//     "RFritzy_JKT48",
+//     "AM_EllaJKT48",
+//     "Gendis_JKT48",
+//     "A_GitaJKT48",
+//     "Gracie_JKT48",
+//     "Greesel_JKT48",
+//     "H_EliJKT48",
+//     "Lily_JKT48",
+//     "C_IndahJKT48",
+//     "JTrisha_JKT48",
+//     "Jeane_JKT48",
+//     "C_JessiJKT48",
+//     "SE_LynJKT48",
+//     "I_KathrinaJKT48",
+//     "Moreen_JKT48",
+//     "A_LuluJKT48",
+//     "L_MarshaJKT48",
+//     "Michie_JKT48",
+//     "Levi_JKT48",
+//     "A_MutheJKT48",
+//     "SNayla_JKT48",
+//     "Nachia_JKT48",
+//     "M_OlineJKT48",
+//     "SW_RaishaJKT48",
+//     "Regie_JKT48",
+//     "R_AdelJKT48",
+//     "Ribka_JKT48",
+//     "Nala_JKT48",
+//     "N_ShaniJKT48", 
+//     "S_GraciaJKT48",
+//     "Kimmy_JKT48",
+// ];
 
 const Twitter = {
-    getData: async (username) => {
+    getData: async (req, res) => {
+        const {username} = req.params;
         const browser = await puppeteerExtra.launch({
-            headless: "new",
+            headless: false,
         });
         const page = await browser.newPage();
         await page.setViewport({
@@ -81,19 +82,7 @@ const Twitter = {
         const cookies = [
             {
                 "domain": ".twitter.com",
-                "expirationDate": 1744383891.88943,
-                "hostOnly": false,
-                "httpOnly": false,
-                "name": "dnt",
-                "path": "/",
-                "secure": true,
-                "session": false,
-                "storeId": null,
-                "value": "1"
-            },
-            {
-                "domain": ".twitter.com",
-                "expirationDate": 1744383892.21435,
+                "expirationDate": 1744624476.91274,
                 "hostOnly": false,
                 "httpOnly": false,
                 "name": "guest_id",
@@ -101,11 +90,11 @@ const Twitter = {
                 "secure": true,
                 "session": false,
                 "storeId": null,
-                "value": "v1%3A170982389114670005"
+                "value": "v1%3A171006447681493952"
             },
             {
                 "domain": "twitter.com",
-                "expirationDate": 1725377672,
+                "expirationDate": 1725616489,
                 "hostOnly": true,
                 "httpOnly": false,
                 "name": "g_state",
@@ -117,30 +106,19 @@ const Twitter = {
             },
             {
                 "domain": ".twitter.com",
-                "expirationDate": 1709912074.404901,
-                "hostOnly": false,
-                "httpOnly": true,
-                "name": "att",
-                "path": "/",
-                "secure": true,
-                "session": false,
-                "storeId": null,
-                "value": "1-9eksHlyxUHVBuF1Pc92u7BqPtBFIxFGy7oMdUTzh"
-            },
-            {
-                "domain": ".twitter.com",
-                "expirationDate": 1744385675.872147,
+                "expirationDate": 1745077019.812074,
                 "hostOnly": false,
                 "httpOnly": false,
                 "name": "_ga",
-                "path": "/",                "secure": false,
+                "path": "/",
+                "secure": false,
                 "session": false,
                 "storeId": null,
                 "value": "GA1.2.1258814914.1709823619"
             },
             {
                 "domain": ".twitter.com",
-                "expirationDate": 1709912075,
+                "expirationDate": 1710603419,
                 "hostOnly": false,
                 "httpOnly": false,
                 "name": "_gid",
@@ -148,23 +126,24 @@ const Twitter = {
                 "secure": false,
                 "session": false,
                 "storeId": null,
-                "value": "GA1.2.1634972708.1709823619"
+                "value": "GA1.2.1568205859.1710338562"
             },
             {
                 "domain": ".twitter.com",
-                "expirationDate": 1744385673.613525,
+                "expirationDate": 1744624490.90614,
                 "hostOnly": false,
                 "httpOnly": true,
                 "name": "auth_token",
                 "path": "/",
+                "sameSite": "no_restriction",
                 "secure": true,
                 "session": false,
                 "storeId": null,
-                "value": "f7ad03ef36594ebff11f5f49245dafea94efe291"
+                "value": "1ef6bded49a5c1ee471b2bb304fe68925948c612"
             },
             {
                 "domain": ".twitter.com",
-                "expirationDate": 1744385673.968666,
+                "expirationDate": 1744624491.468617,
                 "hostOnly": false,
                 "httpOnly": false,
                 "name": "ct0",
@@ -172,34 +151,23 @@ const Twitter = {
                 "secure": true,
                 "session": false,
                 "storeId": null,
-                "value": "df41031b671ff6783fded6b3036b81c2b730648bd7968878e3c9aed3e89755d72b4cd9682e8ad335b5dd75e481b78a31accabd61d9157040c4809066ab3ca0bae74bfdb3bbfe4771cb0123a63eee942b"
+                "value": "e226584e93609d30b54f01b4e31a2a73d69b9580a8e2a3368b72dbb7964bf3f59cfe39887041184f235f3dda9d386ad0f0c9f35a14e6fa9b0da8f22d4ee0925de420bd2f5cd4ed3ebd631a9bf07aa512"
             },
             {
                 "domain": ".twitter.com",
+                "expirationDate": 1710669297.176246,
                 "hostOnly": false,
                 "httpOnly": false,
-                "name": "g_state",
+                "name": "external_referer",
                 "path": "/",
                 "secure": false,
-                "session": true,
-                "storeId": null,
-                "value": "{\"i_l\":0}"
-            },
-            {
-                "domain": ".twitter.com",
-                "expirationDate": 1709832617.503414,
-                "hostOnly": false,
-                "httpOnly": false,
-                "name": "gt",
-                "path": "/",
-                "secure": true,
                 "session": false,
                 "storeId": null,
-                "value": "1765754343083618428"
+                "value": "padhuUp37zifYYULRWRJfuITMdpmDrrTtqsuhkRGK40%3D|0|8e8t2xd8A2w%3D"
             },
             {
                 "domain": ".twitter.com",
-                "expirationDate": 1744385678.772693,
+                "expirationDate": 1745077023.033795,
                 "hostOnly": false,
                 "httpOnly": false,
                 "name": "guest_id_ads",
@@ -207,11 +175,11 @@ const Twitter = {
                 "secure": true,
                 "session": false,
                 "storeId": null,
-                "value": "v1%3A170982389114670005"
+                "value": "v1%3A171006447681493952"
             },
             {
                 "domain": ".twitter.com",
-                "expirationDate": 1744385678.772786,
+                "expirationDate": 1745077023.033873,
                 "hostOnly": false,
                 "httpOnly": false,
                 "name": "guest_id_marketing",
@@ -219,11 +187,11 @@ const Twitter = {
                 "secure": true,
                 "session": false,
                 "storeId": null,
-                "value": "v1%3A170982389114670005"
+                "value": "v1%3A171006447681493952"
             },
             {
                 "domain": ".twitter.com",
-                "expirationDate": 1744385673.613357,
+                "expirationDate": 1744624490.905996,
                 "hostOnly": false,
                 "httpOnly": true,
                 "name": "kdt",
@@ -246,7 +214,7 @@ const Twitter = {
             },
             {
                 "domain": ".twitter.com",
-                "expirationDate": 1744385678.772829,
+                "expirationDate": 1745077023.033924,
                 "hostOnly": false,
                 "httpOnly": false,
                 "name": "personalization_id",
@@ -254,11 +222,11 @@ const Twitter = {
                 "secure": true,
                 "session": false,
                 "storeId": null,
-                "value": "\"v1_hoN5cuzxcpQIaOCJd989gg==\""
+                "value": "\"v1_DcsnD0QnQ8RwGOKFSOY9wA==\""
             },
             {
                 "domain": ".twitter.com",
-                "expirationDate": 1741361678.772849,
+                "expirationDate": 1742053023.033947,
                 "hostOnly": false,
                 "httpOnly": false,
                 "name": "twid",
@@ -266,10 +234,10 @@ const Twitter = {
                 "secure": true,
                 "session": false,
                 "storeId": null,
-                "value": "u%3D2287798488"
+                "value": "u%3D1665721501503586306"
             }
         ]
-  
+
         await page.setCookie(...cookies);
         // Ganti URL berikut dengan URL profil Twitter yang ingin Anda scrap
         const twitterProfileUrl = `https://twitter.com/${username}`;
@@ -330,40 +298,8 @@ const Twitter = {
 
 
         await browser.close();
-        return data;
+        res.send(data);
     },
 };
-
-// Fungsi untuk memperbarui data untuk semua akun
-const updateAllData = async () => {
-    const allData = {};
-    for (const username of twitterAccounts) {
-        const data = await Twitter.getData(username);
-        if (data) {
-            allData[username] = data;
-            console.log(`Data Twitter for ${username} collected.`);
-        }
-    }
-
-    // Simpan semua data ke dalam satu file JSON
-    fs.writeFile(`./db/twitter/all_data.json`, JSON.stringify(allData, null, 2), (err) => {
-        if (err) {
-            console.error(`Error writing to JSON file:`, err);
-            return;
-        }
-        console.log(`All data saved to all_data.json`);
-    });
-};
-
-updateAllData();
-// Tunggu 2 jam sebelum memulai pembaruan data pertama kali
-setTimeout(() => {
-    updateAllData();
-    
-    // Setelah pembaruan pertama, lakukan pembaruan setiap 15 detik
-    setInterval(() => {
-        updateAllData();
-    }, 5000); 
-}, 2 * 60 * 60 * 1000); // Setelah 2 jam
 
 module.exports = Twitter;
